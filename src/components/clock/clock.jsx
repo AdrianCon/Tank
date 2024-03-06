@@ -2,8 +2,10 @@ import { useState,useEffect,useRef } from 'react';
 import { DateTime } from 'luxon'
 import './clock.css'
 
+const notificationAudio = new Audio('/notification.mp3')
+
 export default function Clock(){
-  const [sessionLength, setSessionLength] = useState(25);
+  const [sessionLength, setSessionLength] = useState(1);
   const [breakLength, setBreakLength] = useState(8);
   const [timerState, setTimerState] = useState('stop');
   const [dateDiff, setDateDiff] = useState(
@@ -19,6 +21,7 @@ export default function Clock(){
           setDateDiff(DateTime.now().plus({minutes: breakLength}).diff(DateTime.now()))
           dateDiffRef.current = DateTime.now().plus({minutes: breakLength}).diff(DateTime.now())
           setTimerState('stop')
+          notificationAudio.play()
         } else {
           setDateDiff((state)=>state.minus({seconds: 1}))
           dateDiffRef.current = dateDiffRef.current.minus({seconds: 1})
@@ -40,13 +43,20 @@ export default function Clock(){
 
   function handleStart(){
     if(timerState === 'stop'){
+      const prepend = sessionLength.toString().length === 1 ? "0" : ""
       return (
-        sessionLength + ":00"
+        prepend + sessionLength + ":00"
         )
       } else{
         return(
           dateDiffRef.current.toFormat('mm:ss')
       )
+    }
+  }
+
+  function handleSessionLengthChange(newSessionLength){
+    if(newSessionLength > 0){
+      setSessionLength(newSessionLength)
     }
   }
 
@@ -64,14 +74,14 @@ export default function Clock(){
       >
         <button
           className='length-buttons'
-          onClick={()=>setSessionLength(sessionLength - 1)}
+          onClick={()=>handleSessionLengthChange(sessionLength - 1)}
         >--</button>
         <h2 className="clock">
           {handleStart()}
         </h2>
         <button
           className='length-buttons'
-          onClick={()=>setSessionLength(sessionLength + 1)}
+          onClick={()=>handleSessionLengthChange(sessionLength + 1)}
         >+</button>
       </div>
       <div className="control-buttons">
