@@ -5,64 +5,75 @@ import './clock.css'
 const notificationAudio = new Audio('/notification.mp3')
 
 export default function Clock(){
-  const [sessionLength, setSessionLength] = useState(1);
-  const [breakLength, setBreakLength] = useState(8);
-  const [timerState, setTimerState] = useState('stop');
-  const [dateDiff, setDateDiff] = useState(
-    DateTime.now().plus({minutes: sessionLength}).diff(DateTime.now())
-  );
-  const dateDiffRef = useRef(
-    DateTime.now().plus({minutes: sessionLength}).diff(DateTime.now())
-  )
+const [clockState, setClockState] = useState({
+    sessionLength: 1,
+    timerState: 'stop',
+    dateDiff: DateTime.now().plus({minutes: 1}).diff(DateTime.now())
+  
+  })
+
   useEffect(()=>{
     let interval = setInterval(() => {
-      if(timerState === 'start'){
-        if(parseInt(dateDiffRef.current.toFormat('m')) <= 0 && parseInt(dateDiffRef.current.toFormat('s')) < 1){
-          setDateDiff(DateTime.now().plus({minutes: breakLength}).diff(DateTime.now()))
-          dateDiffRef.current = DateTime.now().plus({minutes: breakLength}).diff(DateTime.now())
-          setTimerState('stop')
+      if(clockState.timerState === 'start'){
+        if(parseInt(clockState.dateDiff.toFormat('m')) <= 0 && parseInt(clockState.dateDiff.toFormat('s')) < 1){
+          setClockState((state)=>({
+            ...state,
+            timerState: 'stop',
+            dateDiff: DateTime.now().plus({minutes: clockState.sessionLength}).diff(DateTime.now())
+          }))
           notificationAudio.play()
         } else {
-          setDateDiff((state)=>state.minus({seconds: 1}))
-          dateDiffRef.current = dateDiffRef.current.minus({seconds: 1})
+          setClockState((state)=>({
+            ...state,
+            dateDiff: state.dateDiff.minus({seconds: 1})
+          }))
         }
-      } else if(timerState === 'stop'){
-        setDateDiff(DateTime.now().plus({minutes: sessionLength}).diff(DateTime.now()))
-        dateDiffRef.current = DateTime.now().plus({minutes: sessionLength}).diff(DateTime.now())
+      } else if(clockState.timerState === 'stop'){
+        setClockState((state)=>({
+          ...state,
+          dateDiff: DateTime.now().plus({minutes: clockState.sessionLength}).diff(DateTime.now())
+        }))
       }
     }, 1000);
 
     return () => {
       clearInterval(interval)
     }
-  }, [timerState, sessionLength])
+  }, [clockState])
 
   function handleTimerState(state){
-    setTimerState(state)
+    setClockState((prevState)=>({
+      ...prevState,
+      timerState: state
+    }))
   }
 
   function handleStart(){
-    if(timerState === 'stop'){
-      const prepend = sessionLength.toString().length === 1 ? "0" : ""
+    if(clockState.timerState === 'stop'){
+      const prepend = clockState.sessionLength.toString().length === 1 ? "0" : ""
       return (
-        prepend + sessionLength + ":00"
+        prepend + clockState.sessionLength + ":00"
         )
       } else{
         return(
-          dateDiffRef.current.toFormat('mm:ss')
+          clockState.dateDiff.toFormat('mm:ss')
       )
     }
   }
 
   function handleSessionLengthChange(newSessionLength){
     if(newSessionLength > 0){
-      setSessionLength(newSessionLength)
+      setClockState((prevState)=>({
+        ...prevState,
+        sessionLength: newSessionLength,
+        dateDiff: DateTime.now().plus({minutes: newSessionLength}).diff(DateTime.now())
+      }))
     }
   }
 
   return(
     <div className='clock-container'>
-      <h1 className='clock-header'>{timerState !== 'break' ? 'Focus' : 'Break'}</h1>
+      <h1 className='clock-header'>{clockState.timerState !== 'break' ? 'Focus' : 'Break'}</h1>
       <div
         style={{
           display: 'flex',
@@ -74,20 +85,20 @@ export default function Clock(){
       >
         <button
           className='length-buttons'
-          onClick={()=>handleSessionLengthChange(sessionLength - 1)}
+          onClick={()=>handleSessionLengthChange(clockState.sessionLength - 1)}
         >--</button>
         <h2 className="clock">
           {handleStart()}
         </h2>
         <button
           className='length-buttons'
-          onClick={()=>handleSessionLengthChange(sessionLength + 1)}
+          onClick={()=>handleSessionLengthChange(clockState.sessionLength + 1)}
         >+</button>
       </div>
       <div className="control-buttons">
         <button
-          onClick={()=>handleTimerState(timerState === 'start'?  'pause' : 'start')}
-        >{timerState === 'start'?  'Pause' : 'Start'}</button>
+          onClick={()=>handleTimerState(clockState.timerState === 'start'?  'pause' : 'start')}
+        >{clockState.timerState === 'start'?  'Pause' : 'Start'}</button>
         <button
           onClick={()=>handleTimerState('stop')}
         >Stop</button>
