@@ -1,4 +1,4 @@
-import { useState,useEffect,useRef } from 'react';
+import { useState,useEffect } from 'react';
 import { DateTime } from 'luxon'
 import './clock.css'
 
@@ -6,7 +6,7 @@ const notificationAudio = new Audio('/notification.mp3')
 
 export default function Clock(){
 const [clockState, setClockState] = useState({
-    sessionLength: 1,
+    sessionLength: 25,
     timerState: 'stop',
     dateDiff: DateTime.now().plus({minutes: 1}).diff(DateTime.now())
   
@@ -74,15 +74,7 @@ const [clockState, setClockState] = useState({
   return(
     <div className='clock-container'>
       <h1 className='clock-header'>{clockState.timerState !== 'break' ? 'Focus' : 'Break'}</h1>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '20px',
-          margin: 'auto'
-        }}
-      >
+      <div className='clock-display'>
         <button
           className='length-buttons'
           onClick={()=>handleSessionLengthChange(clockState.sessionLength - 1)}

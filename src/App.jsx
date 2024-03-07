@@ -157,7 +157,6 @@ const handleTabClick = (i) => {
                 {DateTime.now().toFormat('HH:mm')}
             </p>
           ))}
-          <span/>
         </div>
         <UtilitiesAside />
       </main>

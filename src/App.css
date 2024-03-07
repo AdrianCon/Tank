@@ -90,7 +90,6 @@ span {
 }
 
 .header-text{
-  line-height: 305px;
   /* text-align: center; */
   font-size: 300px;
   margin: 0;
@@ -105,7 +104,6 @@ span {
 }
 
 .header-text-background{
-  line-height: 305px;
   /* text-align: center; */
   font-size: 300px;
   margin: 0;
@@ -166,10 +164,34 @@ span {
   }
 }
 
-.card {
-  padding: 2em;
-}
+@media (max-width: 600px){
+  .content{
+    height: auto;
+    grid-template-rows: 0.5fr 0.5fr 1fr;
+    grid-template-columns: 1fr;
 
-.read-the-docs {
-  color: #888;
+    justify-content: flex-start;
+  }
+  .links{
+    gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: fit-content;
+    align-self: center;
+  }
+  .link{
+    display: flex;
+  }
+  .header{
+    height: auto;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-text{
+    font-size: 150px;
+  }
+  .header-text-background{
+    display: none;
+  }
 }

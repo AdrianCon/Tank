@@ -11,3 +11,11 @@
   overflow: hidden;
   /* padding: 0px 1em; */
 }
+
+@media (max-width: 600px){
+  .utilities-aside{
+    align-items: flex-start;
+    border-top: 2px solid black;
+    border-left: none;
+  }
+}
