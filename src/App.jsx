@@ -48,7 +48,7 @@ function App() {
   const [selectedTab, setSelectedTab] = useState(0);
   const linksRef = useRef(null);
   const timeInterval = useRef(null);
-  const pGenerate = useRef(null);
+  // const pGenerate = useRef(null);
 
   const [time, setTime] = useState(DateTime.now().toFormat('HH:mm'));
 
@@ -98,15 +98,18 @@ const handleTabClick = (i) => {
 }
   
   // useEffect(() => {
+  //   console.log('clearing interval');
   //   clearInterval(pGenerate.current);
   //   pGenerate.current = null;
-    
-  //   pGenerate.current = setInterval(() => {
-  //     const newTimeElement = document.createElement('p');
-  //     newTimeElement.textContent = `${time}`;
-  //     newTimeElement.classList.add('header-text-background'); // Using classList for class addition
-  //     document.getElementById('header').append(newTimeElement);
-  //   }, 1000);
+  //   if(pGenerate.current === null){
+  //     console.log('setting interval');
+  //     pGenerate.current = setInterval(() => {
+  //       const newTimeElement = document.createElement('p');
+  //       newTimeElement.textContent = `${time}`;
+  //       newTimeElement.classList.add('header-text-background'); // Using classList for class addition
+  //       document.getElementById('header').append(newTimeElement);
+  //     }, 1000);
+  //   }
 
   //   return () => clearInterval(pGenerate.current);
   // }, [time]);
@@ -134,33 +137,26 @@ const handleTabClick = (i) => {
               onMouseLeave={(e) => {
                 e.target.style.color = 'black';
               }}
-              // style={{color: selectedTab == i ? hoverColor: 'black'}}
             >{name}</a>
           ))}
         </aside>
         <div className='header' id='header'>
           <p className='header-text'>{time}</p>
-          <p
-              key={`header-text`}
-              className='header-text-background base'
-              style={{
-                animation: 'none !important'
-              }}>
-                {time}
-            </p>
-          {/* {[...Array(50)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <p
               key={`header-text${i}`}
               opacity={100-i*3}
               className='header-text-background'
               style={{
                 marginTop: `${i*15}px`,
+                fontSize: `${300-i*3}px`,
                 opacity: `${100-i*3}%`,
-                // fontSize: `${300-i*3}px`,
+                // animation: `melt 5s infinite linear`,
+                // animationDelay: `${5/i}s`,
               }}>
                 {DateTime.now().toFormat('HH:mm')}
             </p>
-          ))} */}
+          ))}
           <span/>
         </div>
         <UtilitiesAside />

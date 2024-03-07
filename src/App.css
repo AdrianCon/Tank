@@ -102,7 +102,7 @@ ul, li{
   height:100%;
   position: relative;
   /* background-image: linear-gradient(#bcbbb6ff, #bcbbb611, #bcbbb6ff); */
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 span {
@@ -125,6 +125,7 @@ span {
   /* top:-100px; */
   pointer-events: none;
   user-select: none;
+  z-index: 3;
 }
 
 .header-text-background{
@@ -133,14 +134,15 @@ span {
   font-size: 300px;
   margin: 0;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-color: white;
   color: transparent;
   position: absolute;
   /* top: 0px; */
   pointer-events: none;
   user-select: none;
-  animation: melt 10s infinite linear;
+  /* animation: melt 10s infinite linear; */
   will-change: transform;
+  /* opacity: 0; */
 }
 
 .header-text-background.base{
@@ -180,11 +182,11 @@ span {
 @keyframes melt {
   0% {
     transform: translateY(0px) scale(1);
-    opacity: 1;
+    opacity: 0;
   }
   100% {
-    transform: translateY(100%) scale(0.7);
-    opacity: 0;
+    transform: translateY(200%) scale(0.7);
+    opacity: 1;
   }
 }
 
