@@ -41,7 +41,7 @@ body {
   min-height: 100vh;
   background-image: radial-gradient(black 1px, transparent 0);
   background-size: 40px 40px;
-  background-position: 0px 0px;
+  background-position: -19px -19px;
 }
 
 h1 {
