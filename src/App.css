@@ -19,30 +19,6 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-nav ul{
-  width: 100%;
-
-  display: grid;
-  grid-template-rows: 0fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 8px;
-}
-
-ul, li{
-  all: unset;
-}
-
-.tab{
-  cursor: pointer;
-  font-size: 1.3em;
-}
-
-.tab.selected{
-  text-decoration: underline;
-  text-decoration-thickness: 0.1em;
-  transition: color 300ms;
-}
-
 .content{
   display: grid;
   grid-template-rows: 1fr;
