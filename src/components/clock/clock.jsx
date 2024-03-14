@@ -1,8 +1,9 @@
 import { useState,useEffect } from 'react';
 import { DateTime } from 'luxon'
 import './clock.css'
+import notification from '/notification.mp3'
 
-const notificationAudio = new Audio('/notification.mp3')
+const notificationAudio = new Audio(notification)
 
 export default function Clock(){
 const [clockState, setClockState] = useState({
