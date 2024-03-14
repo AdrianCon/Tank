@@ -1,7 +1,7 @@
 import './Nav.css'
 
 const tabs = [
-  'Social',
+  'Common',
   'Stream',
   'Work',
   'Misc',

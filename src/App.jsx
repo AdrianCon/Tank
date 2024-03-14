@@ -15,11 +15,11 @@ const colors = [
 
 const LINKS = [
   {
+    'Tuta': 'https://app.tuta.com/login',
     'YouTube': 'https://www.youtube.com/',
-    'Facebook': 'https://www.facebook.com/',
     'Twitter': 'https://twitter.com/',
-    'Instagram': 'https://www.instagram.com/',
-    'LinkedIn': 'https://www.linkedin.com/',
+    'WhatsApp': 'https://web.whatsapp.com/',
+    'Drive': 'https://drive.google.com/',
   },
   {
     'Netflix': 'https://www.netflix.com/',
@@ -38,8 +38,9 @@ const LINKS = [
     'Mail': 'https://mail.uxlabs.mx/',
   },
   {
-    'Tuta': 'https://app.tuta.com/login',
     'ChatGPT': 'https://app.chatbot.com/',
+    'Gemini': 'https://gemini.google.com/app',
+    'LinkedIn': 'https://www.linkedin.com/',
     'DigitalOcean': 'https://cloud.digitalocean.com/',
   },
 ]
@@ -129,7 +130,6 @@ const handleTabClick = (i) => {
               key={name}
               className='link'
               href={url}
-              target='_blank'
               rel='noreferrer'
               onMouseEnter={(e) => {
                 e.target.style.color = getRandomColor(i);
