@@ -22,15 +22,6 @@ const LINKS = [
     'Drive': 'https://drive.google.com/',
   },
   {
-    'Netflix': 'https://www.netflix.com/',
-    'Crunchyroll': 'https://www.crunchyroll.com/',
-    'Prime Video': 'https://www.primevideo.com/',
-    'Disney+': 'https://www.disneyplus.com/',
-    'Star+': 'https://www.starplus.com/',
-    'MUBI': 'https://mubi.com/',
-    'Max': 'https://www.hbomax.com/',
-  },
-  {
     'GitHub': 'https://github.com/',
     'Google Meet': 'https://meet.google.com/',
     'ClickUp': 'https://app.clickup.com/',
@@ -42,6 +33,15 @@ const LINKS = [
     'Gemini': 'https://gemini.google.com/app',
     'LinkedIn': 'https://www.linkedin.com/',
     'DigitalOcean': 'https://cloud.digitalocean.com/',
+  },
+  {
+    'Netflix': 'https://www.netflix.com/',
+    'Crunchyroll': 'https://www.crunchyroll.com/',
+    'Prime Video': 'https://www.primevideo.com/',
+    'Disney+': 'https://www.disneyplus.com/',
+    'Star+': 'https://www.starplus.com/',
+    'MUBI': 'https://mubi.com/',
+    'Max': 'https://www.hbomax.com/',
   },
 ]
 

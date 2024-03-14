@@ -2,9 +2,9 @@ import './Nav.css'
 
 const tabs = [
   'Common',
-  'Stream',
   'Work',
   'Misc',
+  'Stream',
 ]
 
 export default function Nav({handleTabClick, selectedTab}){
