@@ -62,6 +62,10 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Avoid changing tabs when typing in an input
+      const target = e.target.closest('input') || e.target.closest('textarea');
+      if (target) return;
+
       const key = e.key;
       switch (key) {
           case '1':
