@@ -10,6 +10,7 @@
   --pink: #FE8CA6;
   --green: #004643;
   --yellow: #9B844C;
+  --black: #111;
 
   font-family: Staatliches;
   line-height: 1;
@@ -49,6 +50,11 @@ h1 {
   line-height: 1;
 }
 
+p{
+  margin: 0;
+  padding: 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -72,6 +78,41 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+input[type=checkbox] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em red;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:hover {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
