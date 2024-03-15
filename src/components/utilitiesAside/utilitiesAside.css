@@ -11,6 +11,7 @@
   overflow: hidden;
   height: 80%;
   /* padding: 0px 1em; */
+  overflow-y: hidden;
 }
 
 @media (max-width: 600px){

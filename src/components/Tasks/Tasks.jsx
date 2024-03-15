@@ -84,8 +84,8 @@ export default function Tasks(){
           renderTasks()
         }
       </div>
-      <div>
-        <form className="task" style={{marginTop: 'auto'}}>
+      <div style={{marginTop: 'auto'}}>
+        <form className="task">
           <div className='task-top'>
             <textarea 
               id='task-input'
