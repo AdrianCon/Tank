@@ -46,6 +46,11 @@
   margin: 0 auto;
 }
 
+.control-buttons button{
+  background-color: red;
+  color: white;
+}
+
 .length-buttons{
   padding: 0;
   border: none;
