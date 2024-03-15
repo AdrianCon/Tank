@@ -1,22 +1,25 @@
-
-nav ul{
+nav menu {
   width: 100%;
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 8px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
-ul, li{
+menu,
+li {
   all: unset;
 }
 
-.tab{
+.tab {
   cursor: pointer;
   font-size: 1.3em;
 }
 
-.tab.selected{
+.tab.selected {
   text-decoration: underline;
   text-decoration-thickness: 0.1em;
   transition: color 300ms;

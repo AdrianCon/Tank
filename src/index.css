@@ -5,11 +5,11 @@
 
 :root {
   --background: #bcbbb6;
-  --red: #FF6D6D;
-  --blue: ##3381F9;
-  --pink: #FE8CA6;
+  --red: #ff6d6d;
+  --blue: ##3381f9;
+  --pink: #fe8ca6;
   --green: #004643;
-  --yellow: #9B844C;
+  --yellow: #9b844c;
   --black: #111;
 
   font-family: Staatliches;
@@ -50,7 +50,7 @@ h1 {
   line-height: 1;
 }
 
-p{
+p {
   margin: 0;
   padding: 0;
 }
@@ -79,7 +79,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -112,7 +112,6 @@ input[type="checkbox"]:hover {
   outline: max(2px, 0.15em) solid currentColor;
   outline-offset: max(2px, 0.15em);
 }
-
 
 @media (prefers-color-scheme: light) {
   :root {

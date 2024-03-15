@@ -1,22 +1,21 @@
-import './Nav.css'
+import "./Nav.css";
 
-const tabs = [
-  'Common',
-  'Work',
-  'Misc',
-  'Stream',
-]
+const tabs = ["Common", "Work", "Misc", "Stream"];
 
-export default function Nav({handleTabClick, selectedTab}){
+export default function Nav({ handleTabClick, selectedTab }) {
   return (
     <nav>
-        <ul>
+      <menu>
         {tabs.map((tab, i) => (
-          <li key={i} className={`tab ${selectedTab === i ? 'selected': ''}`} onClick={()=>handleTabClick(i)}>
+          <li
+            key={i}
+            className={`tab ${selectedTab === i ? "selected" : ""}`}
+            onClick={() => handleTabClick(i)}
+          >
             {tab}
           </li>
         ))}
-        </ul>
-      </nav> 
-  )
+      </menu>
+    </nav>
+  );
 }
