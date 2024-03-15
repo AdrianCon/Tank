@@ -78,7 +78,7 @@ export default function Tasks(){
 
   return(
     <div className='task-section'>
-      <h1 className='tasks-header'>Tasks ({tasks.length})</h1>
+      <h1 className='tasks-header'>Tasks <span style={{color: 'red'}}>({tasks.filter(task=> task.status == 'pending').length})</span></h1>
       <div id='tasks-container' className='tasks-container'>
         {
           renderTasks()
