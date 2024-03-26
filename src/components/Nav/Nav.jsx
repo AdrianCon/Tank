@@ -10,7 +10,7 @@ export default function Nav({ handleTabClick, selectedTab }) {
           <li
             key={i}
             className={`tab ${selectedTab === i ? "selected" : ""}`}
-            onClick={() => handleTabClick(i)}
+            onClick={() => (selectedTab === i ? null : handleTabClick(i))}
           >
             {tab}
           </li>
