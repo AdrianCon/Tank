@@ -58,7 +58,7 @@ export default function Tasks() {
                 type="checkbox"
                 // className={}
                 checked={task.status === "done" ? true : false}
-                onClick={() => updateTaskStatus(i)}
+                onChange={() => updateTaskStatus(i)}
               />
             </span>
             <p

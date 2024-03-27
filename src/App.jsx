@@ -1,61 +1,57 @@
-import { useEffect, useRef, useState } from 'react'
-import './App.css'
-import UtilitiesAside from './components/utilitiesAside/utilitiesAside';
-import { DateTime } from 'luxon'
-import Nav from './components/Nav/Nav';
+import { useEffect, useRef, useState } from "react";
+import "./App.css";
+import UtilitiesAside from "./components/utilitiesAside/utilitiesAside";
+import { DateTime } from "luxon";
+import Nav from "./components/Nav/Nav";
+import { useSelector, useDispatch } from "react-redux";
+import { setTab } from "./redux/tabSlice.js/tabSlice.js";
 
-const colors = [
-  '#FE0000',
-  '#3381F9',
-  '#E64B86',
-  '#00850F',
-  '#FFC501',
-];
-
+const colors = ["#FE0000", "#3381F9", "#E64B86", "#00850F", "#FFC501"];
 
 const LINKS = [
   {
-    'Tuta': 'https://app.tuta.com/login',
-    'YouTube': 'https://www.youtube.com/',
-    'Twitter': 'https://twitter.com/',
-    'WhatsApp': 'https://web.whatsapp.com/',
-    'Drive': 'https://drive.google.com/',
+    Tuta: "https://app.tuta.com/login",
+    YouTube: "https://www.youtube.com/",
+    Twitter: "https://twitter.com/",
+    WhatsApp: "https://web.whatsapp.com/",
+    Drive: "https://drive.google.com/",
   },
   {
-    'GitHub': 'https://github.com/',
-    'Google Meet': 'https://meet.google.com/',
-    'ClickUp': 'https://app.clickup.com/',
-    'Cloudron': 'https://my.uxlabs.mx/#/apps',
-    'Mail': 'https://mail.uxlabs.mx/',
+    GitHub: "https://github.com/",
+    "Google Meet": "https://meet.google.com/",
+    ClickUp: "https://app.clickup.com/",
+    Cloudron: "https://my.uxlabs.mx/#/apps",
+    Mail: "https://mail.uxlabs.mx/",
   },
   {
-    'ChatGPT': 'https://app.chatbot.com/',
-    'Gemini': 'https://gemini.google.com/app',
-    'LinkedIn': 'https://www.linkedin.com/',
-    'DigitalOcean': 'https://cloud.digitalocean.com/',
+    ChatGPT: "https://app.chatbot.com/",
+    Gemini: "https://gemini.google.com/app",
+    LinkedIn: "https://www.linkedin.com/",
+    DigitalOcean: "https://cloud.digitalocean.com/",
   },
   {
-    'Netflix': 'https://www.netflix.com/',
-    'Crunchyroll': 'https://www.crunchyroll.com/',
-    'Prime Video': 'https://www.primevideo.com/',
-    'Disney+': 'https://www.disneyplus.com/',
-    'Star+': 'https://www.starplus.com/',
-    'MUBI': 'https://mubi.com/',
-    'Max': 'https://www.hbomax.com/',
+    Netflix: "https://www.netflix.com/",
+    Crunchyroll: "https://www.crunchyroll.com/",
+    "Prime Video": "https://www.primevideo.com/",
+    "Disney+": "https://www.disneyplus.com/",
+    "Star+": "https://www.starplus.com/",
+    MUBI: "https://mubi.com/",
+    Max: "https://www.hbomax.com/",
   },
-]
+];
 
 function App() {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const dispatch = useDispatch();
+  const selectedTab = useSelector((state) => state.tab);
   const linksRef = useRef(null);
   const timeInterval = useRef(null);
   // const pGenerate = useRef(null);
 
-  const [time, setTime] = useState(DateTime.now().toFormat('HH:mm'));
+  const [time, setTime] = useState(DateTime.now().toFormat("HH:mm"));
 
   useEffect(() => {
     timeInterval.current = setInterval(() => {
-      setTime(DateTime.now().toFormat('HH:mm'));
+      setTime(DateTime.now().toFormat("HH:mm"));
     }, 1000);
     return () => clearInterval(timeInterval.current);
   }, []);
@@ -63,45 +59,42 @@ function App() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       // Avoid changing tabs when typing in an input
-      const target = e.target.closest('input') || e.target.closest('textarea');
+      const target = e.target.closest("input") || e.target.closest("textarea");
       if (target) return;
 
       const key = e.key;
       switch (key) {
-          case '1':
-            handleTabClick(0);
-            break;
-          case '2':
-            handleTabClick(1);
-            break;
-          case '3':
-            handleTabClick(2);
-            break;
-          case '4':
-            handleTabClick(3);
-            break;
-          default:
-            break;
+        case "1":
+          dispatch(setTab(0));
+          break;
+        case "2":
+          dispatch(setTab(1));
+          break;
+        case "3":
+          dispatch(setTab(2));
+          break;
+        case "4":
+          dispatch(setTab(3));
+          break;
+        default:
+          break;
       }
     };
-    document.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener("keydown", handleKeyDown, true);
 
     return () => {
-        document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
+  }, [dispatch]);
 
-}, []);
+  useEffect(() => {
+    clearTimeout(linksRef.current);
+    document.getElementById("links").classList.add("animate");
+    linksRef.current = setTimeout(() => {
+      document.getElementById("links").classList.remove("animate");
+    }, 1000);
+  }, [selectedTab]);
 
-
-const handleTabClick = (i) => {
-  clearTimeout(linksRef.current);
-  document.getElementById('links').classList.add('animate');
-  setSelectedTab(i);
-  linksRef.current = setTimeout(() => {
-    document.getElementById('links').classList.remove('animate');
-  }, 1000);
-}
-  
   // useEffect(() => {
   //   console.log('clearing interval');
   //   clearInterval(pGenerate.current);
@@ -126,46 +119,49 @@ const handleTabClick = (i) => {
 
   return (
     <>
-      <Nav handleTabClick={handleTabClick} selectedTab={selectedTab} />
-      <main id='content' className='content'>
-        <aside id='links' className='links'>
-          {Object.entries(LINKS[selectedTab]).map(([name, url],i) => (
+      <Nav />
+      <main id="content" className="content">
+        <aside id="links" className="links">
+          {Object.entries(LINKS[selectedTab]).map(([name, url], i) => (
             <a
               key={name}
-              className='link'
+              className="link"
               href={url}
-              rel='noreferrer'
+              rel="noreferrer"
               onMouseEnter={(e) => {
                 e.target.style.color = getRandomColor(i);
               }}
               onMouseLeave={(e) => {
-                e.target.style.color = 'black';
+                e.target.style.color = "black";
               }}
-            >{name}</a>
+            >
+              {name}
+            </a>
           ))}
         </aside>
-        <div className='header' id='header'>
-          <p className='header-text'>{time}</p>
+        <div className="header" id="header">
+          <p className="header-text">{time}</p>
           {[...Array(30)].map((_, i) => (
             <p
               key={`header-text${i}`}
-              opacity={100-i*3}
-              className='header-text-background'
+              opacity={100 - i * 3}
+              className="header-text-background"
               style={{
-                marginTop: `${i*15}px`,
-                fontSize: `${300-i*3}px`,
-                opacity: `${100-i*3}%`,
+                marginTop: `${i * 15}px`,
+                fontSize: `${300 - i * 3}px`,
+                opacity: `${100 - i * 3}%`,
                 // animation: `melt 5s infinite linear`,
                 // animationDelay: `${5/i}s`,
-              }}>
-                {DateTime.now().toFormat('HH:mm')}
+              }}
+            >
+              {DateTime.now().toFormat("HH:mm")}
             </p>
           ))}
         </div>
         <UtilitiesAside />
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
