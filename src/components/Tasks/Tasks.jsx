@@ -1,28 +1,21 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getTasks,
+  updateTaskStatus,
+  addTask,
+  removeTask,
+} from "../../redux/tasksSlice";
 import "./Tasks.css";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState(getTasks());
+  const dispatch = useDispatch();
+  const tasks = useSelector((state) => state.tasks);
+  // const [tasks, setTasks] = useState(getTasks());
 
-  function getTasks() {
-    const tasks = localStorage.getItem("tasks");
-    if (tasks) {
-      return JSON.parse(tasks);
-    } else {
-      return [];
-    }
-  }
-
-  function addTask() {
+  function addTaskHandler() {
     const input = document.getElementById("task-input");
-    console.log(input.value);
-    const newTask = {
-      task: input.value,
-      status: "pending",
-    };
-
-    localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
-    setTasks([...tasks, newTask]);
+    dispatch(addTask(input.value));
 
     // Hacky way to remove new line after adding a task
     setTimeout(() => {
@@ -30,20 +23,17 @@ export default function Tasks() {
     }, 100);
   }
 
-  function updateTaskStatus(index) {
-    const newTasks = tasks;
-    newTasks[index].status =
-      newTasks[index].status === "pending" ? "done" : "pending";
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
-    setTasks([...newTasks]);
+  function updateTaskStatusHandler(index) {
+    dispatch(updateTaskStatus(index));
   }
 
-  function removeTask(index) {
-    const newTasks = tasks;
-    newTasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
-    setTasks([...newTasks]);
+  function removeTaskHandler(index) {
+    dispatch(removeTask(index));
   }
+
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
 
   function renderTasks() {
     return tasks.map((task, i) => {
@@ -58,7 +48,7 @@ export default function Tasks() {
                 type="checkbox"
                 // className={}
                 checked={task.status === "done" ? true : false}
-                onChange={() => updateTaskStatus(i)}
+                onChange={() => updateTaskStatusHandler(i)}
               />
             </span>
             <p
@@ -76,7 +66,7 @@ export default function Tasks() {
             </p>
             <span
               className="task-remove"
-              onClick={() => removeTask(i)}
+              onClick={() => removeTaskHandler(i)}
               title="Remove task"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -109,10 +99,10 @@ export default function Tasks() {
               className="task-input"
               placeholder="Add a task"
               onKeyDown={(e) => {
-                e.key === "Enter" && addTask();
+                e.key === "Enter" && addTaskHandler();
               }}
             />
-            <p className="task-input-add-button" onClick={addTask}>
+            <p className="task-input-add-button" onClick={addTaskHandler}>
               +
             </p>
           </div>
