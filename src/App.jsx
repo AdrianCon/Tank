@@ -46,6 +46,7 @@ function App() {
   const linksRef = useRef(null);
   const timeInterval = useRef(null);
   // const pGenerate = useRef(null);
+  const [weather, setWeather] = useState(null);
 
   const [time, setTime] = useState(DateTime.now().toFormat("HH:mm"));
 
@@ -53,6 +54,14 @@ function App() {
     timeInterval.current = setInterval(() => {
       setTime(DateTime.now().toFormat("HH:mm"));
     }, 1000);
+
+    fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${
+        import.meta.env.VITE_WEATHER_API_KEY
+      }&q=Monterrey`
+    )
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setWeather(data));
     return () => clearInterval(timeInterval.current);
   }, []);
 
@@ -159,6 +168,22 @@ function App() {
           ))}
         </div>
         <UtilitiesAside />
+        {weather && (
+          <footer style={{ height: "40px" }}>
+            <h3
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ color: "red" }}>{weather?.current?.temp_c}°C</span>
+              <span>|</span>
+              <span>{weather?.current?.condition?.text}</span>
+            </h3>
+          </footer>
+        )}
       </main>
     </>
   );
