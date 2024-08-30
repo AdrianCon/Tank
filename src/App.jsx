@@ -43,7 +43,6 @@ const LINKS = [
 function App() {
   const dispatch = useDispatch();
   const selectedTab = useSelector((state) => state.tab);
-  const linksRef = useRef(null);
   const timeInterval = useRef(null);
   // const pGenerate = useRef(null);
   const [weather, setWeather] = useState(null);
@@ -56,7 +55,7 @@ function App() {
     }, 1000);
 
     fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${
+      `https://api.weatherapi.com/v1/current.json?key=${
         import.meta.env.VITE_WEATHER_API_KEY
       }&q=Monterrey`
     )
@@ -96,14 +95,6 @@ function App() {
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    clearTimeout(linksRef.current);
-    document.getElementById("links").classList.add("animate");
-    linksRef.current = setTimeout(() => {
-      document.getElementById("links").classList.remove("animate");
-    }, 1000);
-  }, [selectedTab]);
-
   // useEffect(() => {
   //   console.log('clearing interval');
   //   clearInterval(pGenerate.current);
@@ -133,6 +124,7 @@ function App() {
         <aside id="links" className="links">
           {Object.entries(LINKS[selectedTab]).map(([name, url], i) => (
             <a
+              style={{ "--delay": `${i * 0.3}` }}
               key={name}
               className="link"
               href={url}
@@ -159,8 +151,8 @@ function App() {
                 marginTop: `${i * 15}px`,
                 fontSize: `${300 - i * 3}px`,
                 opacity: `${100 - i * 3}%`,
-                // animation: `melt 5s infinite linear`,
-                // animationDelay: `${5/i}s`,
+                // animation: `melt 1s infinite linear`,
+                // animationDelay: `${5 / i}s`,
               }}
             >
               {DateTime.now().toFormat("HH:mm")}

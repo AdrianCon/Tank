@@ -40,10 +40,6 @@
   overflow: hidden;
 }
 
-.links.animate {
-  animation: slide-in 1s;
-}
-
 .link {
   text-decoration: none;
   color: black;
@@ -51,6 +47,7 @@
   font-weight: 500;
   transition: color 300ms, font-size 300ms, text-decoration 300ms;
   height: 40px;
+  animation: slide-in calc(1s * var(--delay));
 }
 
 .link:hover {
@@ -61,7 +58,7 @@
 
 @keyframes slide-in {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-400%);
     opacity: 0;
   }
   100% {
