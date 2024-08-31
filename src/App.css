@@ -92,7 +92,7 @@
 }
 
 .header-text-background {
-  font-size: 300px;
+  font-size: calc(300px - var(--index) * 3px);
   margin: 0;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
@@ -100,7 +100,10 @@
   position: absolute;
   pointer-events: none;
   user-select: none;
-  will-change: transform;
+  will-change: transform, opacity, font-size;
+  margin-top: calc(var(--index) * 15px);
+  /* animation: melt 1s infinite ease-in-out calc(var(--index) * 0.2s); */
+  animation: melt 1s infinite linear;
 }
 
 .header-text-background.base {
@@ -109,12 +112,14 @@
 
 @keyframes melt {
   0% {
-    transform: translateY(0px) scale(1);
-    opacity: 0;
+    transform: translateY(0px);
+    opacity: calc(1% * (100 - 3.3 * var(--index)));
+    font-size: calc(300px - var(--index) * 3px);
   }
   100% {
-    transform: translateY(200%) scale(0.7);
-    opacity: 1;
+    transform: translateY(7.5px);
+    opacity: calc(1% * (100 - 3.3 * (var(--index) + 1)));
+    font-size: calc(300px - (var(--index) + 1) * 3px);
   }
 }
 

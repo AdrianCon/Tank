@@ -148,11 +148,7 @@ function App() {
               opacity={100 - i * 3}
               className="header-text-background"
               style={{
-                marginTop: `${i * 15}px`,
-                fontSize: `${300 - i * 3}px`,
-                opacity: `${100 - i * 3}%`,
-                // animation: `melt 1s infinite linear`,
-                // animationDelay: `${5 / i}s`,
+                "--index": `${i}`,
               }}
             >
               {DateTime.now().toFormat("HH:mm")}
