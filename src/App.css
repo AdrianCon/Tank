@@ -45,14 +45,14 @@
   color: black;
   font-size: 1.5em;
   font-weight: 500;
-  transition: color 300ms, font-size 300ms, text-decoration 300ms;
+  transition: color 300ms, transform 300ms, text-decoration 300ms;
   height: 40px;
   animation: slide-in calc(1s * var(--delay));
+  will-change: color font-size text-decoration transform opacity transition;
 }
 
 .link:hover {
-  font-size: 2em;
-  transition: font-size 300ms, text-decoration 300ms;
+  transform: scale(1.3);
   text-decoration: underline;
 }
 
@@ -103,7 +103,7 @@
   will-change: transform, opacity, font-size;
   margin-top: calc(var(--index) * 15px);
   /* animation: melt 1s infinite ease-in-out calc(var(--index) * 0.2s); */
-  animation: melt 1s infinite linear;
+  animation: melt 0.3s infinite linear;
 }
 
 .header-text-background.base {
