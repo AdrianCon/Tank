@@ -4,6 +4,8 @@
   padding: 40px;
   text-align: center;
   height: 100%;
+
+  --header-size: 400px;
 }
 
 .logo {
@@ -84,7 +86,7 @@
 }
 
 .header-text {
-  font-size: 300px;
+  font-size: var(--header-size);
   margin: 0;
   color: black;
   pointer-events: none;
@@ -93,7 +95,7 @@
 }
 
 .header-text-background {
-  font-size: calc(300px - var(--index) * 3px);
+  font-size: calc(var(--header-size) - var(--index) * 3px);
   margin: 0;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
@@ -101,10 +103,9 @@
   position: absolute;
   pointer-events: none;
   user-select: none;
-  will-change: transform, opacity, font-size;
   margin-top: calc(var(--index) * 15px);
-  /* animation: melt 1s infinite ease-in-out calc(var(--index) * 0.2s); */
   animation: melt 0.3s infinite linear;
+  transform-origin: center;
 }
 
 .header-text-background.base {
@@ -113,14 +114,12 @@
 
 @keyframes melt {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(1);
     opacity: calc(1% * (100 - 3.3 * var(--index)));
-    font-size: calc(300px - var(--index) * 3px);
   }
   100% {
-    transform: translateY(7.5px);
+    transform: translateY(15px) scale(0.985);
     opacity: calc(1% * (100 - 3.3 * (var(--index) + 1)));
-    font-size: calc(300px - (var(--index) + 1) * 3px);
   }
 }
 
