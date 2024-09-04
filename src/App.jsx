@@ -15,6 +15,7 @@ const LINKS = [
     Twitter: "https://twitter.com/",
     WhatsApp: "https://web.whatsapp.com/",
     Drive: "https://drive.google.com/",
+    GMail: "https://mail.google.com/",
   },
   {
     GitHub: "https://github.com/",
@@ -24,7 +25,8 @@ const LINKS = [
     Mail: "https://mail.uxlabs.mx/",
   },
   {
-    ChatGPT: "https://app.chatbot.com/",
+    LeetCode: "https://leetcode.com/",
+    KodeKloud: "https://www.kodekloud.com/",
     Gemini: "https://gemini.google.com/app",
     LinkedIn: "https://www.linkedin.com/",
     DigitalOcean: "https://cloud.digitalocean.com/",
