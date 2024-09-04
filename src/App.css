@@ -47,8 +47,8 @@
   font-weight: 500;
   transition: color 300ms, transform 300ms, text-decoration 300ms;
   height: 40px;
-  animation: slide-in calc(1s * var(--delay));
-  will-change: color font-size text-decoration transform opacity transition;
+  animation: slide-in calc(0.5s + (1s * var(--delay)));
+  will-change: color font-size text-decoration transform opacity;
 }
 
 .link:hover {
@@ -58,7 +58,7 @@
 
 @keyframes slide-in {
   0% {
-    transform: translateX(-400%);
+    transform: translateX(-100%);
     opacity: 0;
   }
   100% {
