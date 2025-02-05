@@ -5,6 +5,16 @@ import { DateTime } from "luxon";
 import Nav from "./components/Nav/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { setTab } from "./redux/tabSlice.js/tabSlice.js";
+import Loader from "./components/Loader/Loader.jsx";
+import GoogleButton from "./components/GoogleButton/GoogleButton.jsx";
+import gmail from "./assets/icons8-gmail.svg";
+import drive from "./assets/icons8-google-drive.svg";
+import calendar from "./assets/icons8-google-calendar.svg";
+import maps from "./assets/icons8-google-maps-old.svg";
+import keep from "./assets/icons8-google-keep.svg";
+import translate from "./assets/icons8-google-translate-new.svg";
+import photos from "./assets/icons8-google-photos.svg";
+import books from "./assets/icons8-google-books.svg";
 
 const colors = ["#FE0000", "#3381F9", "#E64B86", "#00850F", "#FFC501"];
 
@@ -14,8 +24,6 @@ const LINKS = [
     YouTube: "https://www.youtube.com/",
     Twitter: "https://twitter.com/",
     WhatsApp: "https://web.whatsapp.com/",
-    Drive: "https://drive.google.com/",
-    GMail: "https://mail.google.com/",
   },
   {
     GitHub: "https://github.com/",
@@ -158,24 +166,39 @@ function App() {
           ))}
         </div>
         <UtilitiesAside />
-        {weather && (
-          <footer style={{ height: "40px" }}>
-            <h3
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-                margin: "0",
-              }}
-            >
-              <span style={{ color: "red" }}>{weather?.current?.temp_c}°C</span>
-              <span>|</span>
-              <span>{weather?.current?.condition?.text}</span>
-            </h3>
-          </footer>
-        )}
+        <footer style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "40px" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%", gap: "10px" }}>
+            <GoogleButton src={gmail} alt={"Gmail"} redirect={"https://mail.google.com"}/>
+            <GoogleButton src={drive} alt={"Drive"} redirect={"https://drive.google.com"}/>
+            <GoogleButton src={calendar} alt={"Calendar"} redirect={"https://calendar.google.com"}/>
+            <GoogleButton src={maps} alt={"Maps"} redirect={"https://maps.google.com"}/>
+            <GoogleButton src={keep} alt={"Keep"} redirect={"https://keep.google.com"}/>
+            <GoogleButton src={translate} alt={"Translate"} redirect={"https://translate.google.com"}/>
+            <GoogleButton src={photos} alt={"Photos"} redirect={"https://photos.google.com"}/>
+            <GoogleButton src={books} alt={"Books"} redirect={"https://books.google.com"}/>
+          </div>
+          <h3
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              margin: "0",
+              position: "relative",
+            }}
+          >
+            {weather ? (
+              <>
+                <span style={{ color: "red" }}>{weather?.current?.temp_c}°C</span>
+                <span>|</span>
+                <span>{weather?.current?.condition?.text}</span>
+              </>
+            ) : (
+              <Loader />
+            )}
+          </h3>
+        </footer>
       </main>
     </>
   );
