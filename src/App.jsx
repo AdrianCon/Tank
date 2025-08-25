@@ -73,6 +73,7 @@ function App() {
 
   return (
     <>
+      {/* <div className="background"/> */}
       <Nav />
       <main id="content" className="content">
         <aside id="links" className="links">
