@@ -4,21 +4,18 @@ export const LINKS = [
   {
     Tuta: "https://app.tuta.com/login",
     YouTube: "https://www.youtube.com/",
-    Twitter: "https://twitter.com/",
+    // Twitter: "https://twitter.com/",
+    LeetCode: "https://leetcode.com/",
+    LinkedIn: "https://www.linkedin.com/",
     WhatsApp: "https://web.whatsapp.com/",
   },
   {
     GitHub: "https://github.com/",
-    "Google Meet": "https://meet.google.com/",
     ClickUp: "https://app.clickup.com/",
-    Cloudron: "https://my.uxlabs.mx/#/apps",
-    Mail: "https://mail.uxlabs.mx/",
   },
   {
-    LeetCode: "https://leetcode.com/",
     KodeKloud: "https://www.kodekloud.com/",
     Gemini: "https://gemini.google.com/app",
-    LinkedIn: "https://www.linkedin.com/",
     DigitalOcean: "https://cloud.digitalocean.com/",
   },
   {
